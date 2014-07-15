@@ -18,30 +18,14 @@ class plxMySocialButtons extends plxPlugin {
 	 **/
 	public function __construct($default_lang) {
 
-        # appel du constructeur de la classe plxPlugin (obligatoire)
-        parent::__construct($default_lang);
+		# appel du constructeur de la classe plxPlugin (obligatoire)
+		parent::__construct($default_lang);
 
 		# déclaration des hooks
-		$this->addHook('ThemeEndHead', 'ThemeEndHead');
 		$this->addHook('ThemeEndBody', 'ThemeEndBody');
 		$this->addHook('MySocialButtons', 'MySocialButtons');
-    }
-
-	/**
-	 * Méthode qui ajoute le code css dans la partie <head>
-	 *
-	 * @return	stdio
-	 * @author	Stephane F
-	 **/
-    public function ThemeEndHead() {?>
-
-<style type="text/css">
-.social-buttons { text-align:center; padding:10px 0 10px 0 }
-.social-buttons div { display:inline-block; vertical-align:top; }
-</style >
-
-	<?php
-    }
+		$this->addHook('MySocialButtonsStatic', 'MySocialButtonsStatic');
+	}
 
 	/**
 	 * Méthode qui ajoute l'appel des API des réseaux sociaux
@@ -49,7 +33,7 @@ class plxMySocialButtons extends plxPlugin {
 	 * @return	stdio
 	 * @author	Stephane F, aruhuno
 	 **/
-    public function ThemeEndBody() {?>
+	public function ThemeEndBody() {?>
 
 <script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
 <script type="text/javascript" src="http://connect.facebook.net/fr_FR/all.js#xfbml=1"></script>
@@ -62,24 +46,42 @@ class plxMySocialButtons extends plxPlugin {
 	})();
 </script>
 	<?php
-    }
+	}
+
+	/**
+	 * Méthode qui affiche les boutons sociaux sur une page statique
+	 *
+	 * @return	stdio
+	 * @author	Stephane F, aruhuno
+	 **/
+	public function MySocialButtons() {?>
+
+		<div class="social-buttons">
+			<div id="fb-root"></div>
+			<div><div class="g-plus" data-action="share" data-annotation="none" data-href="<?php echo "<?php \$plxShow->artUrl() ?>" ?>"></div></div>
+			<div><a href="https://twitter.com/share" class="twitter-share-button" data-url="<?php echo "<?php \$plxShow->artUrl() ?>" ?>" data-lang="fr" data-count="none">Tweeter</a></div>
+			<div class="fb-like" data-href="<?php echo "<?php \$plxShow->artUrl() ?>" ?>" data-send="false" data-layout="button_count" data-width="20" data-show-faces="false"></div>
+		</div>
+
+	<?php
+	}
 
 	/**
 	 * Méthode qui affiche les boutons sociaux
 	 *
 	 * @return	stdio
-	 * @author	Stephane F, aruhuno
+	 * @author	Stephane F, Etienne R
 	 **/
-    public function MySocialButtons() {?>
+	public function MySocialButtonsStatic() {?>
 
 		<div class="social-buttons">
 			<div id="fb-root"></div>
-			<div><div class="g-plus" data-action="share" data-annotation="none" data-href="<?php echo "<?php echo \$plxShow->artUrl() ?>" ?>"></div></div>
-			<div><a href="https://twitter.com/share" class="twitter-share-button" data-url="<?php echo "<?php echo \$plxShow->artUrl() ?>" ?>" data-lang="fr" data-count="none">Tweeter</a></div>
-			<div class="fb-like" data-href="<?php echo "<?php echo \$plxShow->artUrl() ?>" ?>" data-send="false" data-layout="button_count" data-width="20" data-show-faces="false"></div>
+			<div><div class="g-plus" data-action="share" data-annotation="none" data-href="<?php echo "<?php \$plxShow->staticUrl() ?>" ?>"></div></div>
+			<div><a href="https://twitter.com/share" class="twitter-share-button" data-url="<?php echo "<?php \$plxShow->staticUrl() ?>" ?>" data-lang="fr" data-count="none">Tweeter</a></div>
+			<div class="fb-like" data-href="<?php echo "<?php \$plxShow->staticUrl() ?>" ?>" data-send="false" data-layout="button_count" data-width="20" data-show-faces="false"></div>
 		</div>
 
 	<?php
-    }
+	}
 }
 ?>
