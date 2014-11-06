@@ -1,3 +1,6 @@
+## Version 1.4.1 (06/11/2014) ##
+[+] Chargement des fichiers javascript que si nécessaire (contribution Jormun)
+
 ## Version 1.4 (15/07/2014) ##
 [+] Ajout du hook MySocialButtonsStatic pour afficher les boutons sociaux sur une page statique (contribution Etienne R)
 [+] Utilisation du menu "Code css" du plugin pour définir les propriétés css de .social-buttons, au lieu d'être codé en dur dans le plugin

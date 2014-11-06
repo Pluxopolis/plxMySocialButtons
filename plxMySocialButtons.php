@@ -9,6 +9,8 @@
  **/
 class plxMySocialButtons extends plxPlugin {
 
+	protected $callable = false;
+
 	/**
 	 * Constructeur de la classe
 	 *
@@ -33,8 +35,9 @@ class plxMySocialButtons extends plxPlugin {
 	 * @return	stdio
 	 * @author	Stephane F, aruhuno
 	 **/
-	public function ThemeEndBody() {?>
-
+	public function ThemeEndBody() {
+		if(!$this->callable) return;
+?>
 <script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
 <script type="text/javascript" src="http://connect.facebook.net/fr_FR/all.js#xfbml=1"></script>
 <script type="text/javascript">
@@ -45,7 +48,7 @@ class plxMySocialButtons extends plxPlugin {
 		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
 	})();
 </script>
-	<?php
+<?php
 	}
 
 	/**
@@ -54,8 +57,9 @@ class plxMySocialButtons extends plxPlugin {
 	 * @return	stdio
 	 * @author	Stephane F, aruhuno
 	 **/
-	public function MySocialButtons() {?>
-
+	public function MySocialButtons() {
+		$this->callable = true;
+	?>
 		<div class="social-buttons">
 			<div id="fb-root"></div>
 			<div><div class="g-plus" data-action="share" data-annotation="none" data-href="<?php echo "<?php \$plxShow->artUrl() ?>" ?>"></div></div>
@@ -72,8 +76,9 @@ class plxMySocialButtons extends plxPlugin {
 	 * @return	stdio
 	 * @author	Stephane F, Etienne R
 	 **/
-	public function MySocialButtonsStatic() {?>
-
+	public function MySocialButtonsStatic() {
+		$this->callable = true;
+	?>
 		<div class="social-buttons">
 			<div id="fb-root"></div>
 			<div><div class="g-plus" data-action="share" data-annotation="none" data-href="<?php echo "<?php \$plxShow->staticUrl() ?>" ?>"></div></div>
